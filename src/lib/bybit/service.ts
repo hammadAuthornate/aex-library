@@ -1,31 +1,20 @@
-import axios from "axios";
-import { SymbolDetails } from "../../types/bybit";
+import { RestClientV5, TickerSpotV5 } from "bybit-api";
+
+const client = new RestClientV5({ testnet: true });
 
 export class ByBitService {
-  static async fetchSymbolList(): Promise<string[]> {
-    const response = await axios.get(
-      "https://api.bybit.com/v5/market/tickers",
-      {
-        params: {
-          category: "spot",
-        },
-      }
-    );
-    return response.data.result.list.map(
-      (item: { symbol: string }) => item.symbol
-    );
+  static async fetchSymbolList(): Promise<TickerSpotV5[]> {
+    const response = await client.getTickers({ category: "spot" });
+    return response.result.list;
   }
 
-  static async fetchSymbolDetails(symbol: string): Promise<SymbolDetails> {
-    const response = await axios.get(
-      "https://api.bybit.com/v5/market/tickers",
-      {
-        params: {
-          category: "spot",
-          symbol: symbol,
-        },
-      }
-    );
-    return response.data.result.list[0];
+  static async fetchSymbolDetails(
+    symbol: string
+  ): Promise<TickerSpotV5 | undefined> {
+    const response = await client.getTickers({
+      category: "spot",
+      symbol: symbol,
+    });
+    return response.result.list?.at(0);
   }
 }

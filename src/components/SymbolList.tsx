@@ -21,7 +21,7 @@ const SymbolList: FC = () => {
     <div>
       <h2>Spot Trading Symbols</h2>
       <ul style={{ maxHeight: "450px", overflowY: "scroll" }}>
-        {symbols?.map((symbol) => (
+        {symbols?.map(({ symbol }) => (
           <li
             key={symbol}
             onClick={() => setSelectedSymbol(symbol)}

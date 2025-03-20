@@ -41,6 +41,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.69.0",
     "@tanstack/react-query-devtools": "^5.69.0",
-    "axios": "^1.8.4"
+    "axios": "^1.8.4",
+    "bybit-api": "^4.0.1"
   }
 }

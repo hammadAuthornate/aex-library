@@ -1,5 +1,4 @@
 import SymbolList from "./components/SymbolList";
-import SymbolDetails from "./components/SymbolDetails";
 import QueryProvider from "./provider/QueryProvider";
 
 function App() {
@@ -7,7 +6,6 @@ function App() {
     <div className="App">
       <QueryProvider>
         <SymbolList />
-        <SymbolDetails />
       </QueryProvider>
     </div>
   );
