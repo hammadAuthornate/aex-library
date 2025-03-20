@@ -1,4 +1,4 @@
-import { useFetchSymbolDetails } from "../lib/bybit/api";
+import { useGetBybitSymbolDetails } from "../lib/bybit/api";
 
 export default function SymbolDetails({
   selectedSymbol,
@@ -10,7 +10,7 @@ export default function SymbolDetails({
     isLoading,
     isError,
     error,
-  } = useFetchSymbolDetails(selectedSymbol);
+  } = useGetBybitSymbolDetails(selectedSymbol);
   if (!selectedSymbol) {
     return <div>Select a symbol to view details.</div>;
   }

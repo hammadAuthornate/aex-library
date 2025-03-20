@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useFetchSymbolList } from "../lib/bybit/api";
+import { useGetBybitSymbolList } from "../lib/bybit/api";
 import SymbolDetails from "./SymbolDetails";
 
 const SymbolList: FC = () => {
@@ -7,7 +7,7 @@ const SymbolList: FC = () => {
     undefined
   );
 
-  const { data: symbols, isLoading, isError, error } = useFetchSymbolList();
+  const { data: symbols, isLoading, isError, error } = useGetBybitSymbolList();
 
   if (isLoading) {
     return <div>Loading...</div>;

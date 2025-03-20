@@ -1,45 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { SymbolDetails } from "../../types/bybit";
+import { ByBitService } from "./service";
 
-export function useFetchSymbolList() {
+export function useGetBybitSymbolList() {
   return useQuery({
     queryKey: ["bybit-symbol-list"],
-    queryFn: async () => {
-      const response = await axios.get(
-        "https://api.bybit.com/v5/market/tickers",
-        {
-          params: {
-            category: "spot",
-          },
-        }
-      );
-      const symbols: string[] = response.data.result.list.map(
-        (item: { symbol: string }) => item.symbol
-      );
-      return symbols;
-    },
+    queryFn: ByBitService.fetchSymbolList,
   });
 }
 
-export function useFetchSymbolDetails(symbol?: string) {
+export function useGetBybitSymbolDetails(symbol?: string) {
   return useQuery({
     queryKey: ["bybit-symbol-details", symbol],
-    queryFn: async () => {
+    queryFn: () => {
       if (!symbol) {
-        throw Error("No Symbol provided");
+        throw new Error("No Symbol provided");
       }
-      const response = await axios.get(
-        "https://api.bybit.com/v5/market/tickers",
-        {
-          params: {
-            category: "spot",
-            symbol: symbol,
-          },
-        }
-      );
-      const symbolDetails: SymbolDetails = response.data.result.list[0];
-      return symbolDetails;
+      return ByBitService.fetchSymbolDetails(symbol);
     },
+    enabled: !!symbol, // Ensure the query only runs when a symbol is provided
   });
 }
