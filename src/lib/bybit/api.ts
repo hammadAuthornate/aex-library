@@ -26,7 +26,7 @@ export function useFetchSymbolDetails(symbol?: string) {
   return useQuery({
     queryKey: ["bybit-symbol-details", symbol],
     queryFn: async () => {
-      if (symbol) {
+      if (!symbol) {
         throw Error("No Symbol provided");
       }
       const response = await axios.get(
