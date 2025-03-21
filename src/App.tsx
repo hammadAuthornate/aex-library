@@ -1,11 +1,11 @@
-import SymbolList from "./components/SymbolList";
+import BitgetSymbolList from "./components/BitgetSymbolList";
 import QueryProvider from "./provider/QueryProvider";
 
 function App() {
   return (
     <div className="App">
       <QueryProvider>
-        <SymbolList />
+        <BitgetSymbolList/>
       </QueryProvider>
     </div>
   );

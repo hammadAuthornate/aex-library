@@ -42,6 +42,8 @@
     "@tanstack/react-query": "^5.69.0",
     "@tanstack/react-query-devtools": "^5.69.0",
     "axios": "^1.8.4",
+    "binance": "^2.15.14",
+    "bitget-api": "^2.3.5",
     "bybit-api": "^4.0.1"
   }
 }
