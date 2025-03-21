@@ -4,7 +4,7 @@ export class BitgetService {
    */
   static async fetchSymbolList(): Promise<{ symbol: string }[]> {
     try {
-      const response = await fetch(
+      const response = await fetch( 
         "https://api.bitget.com/api/spot/v1/public/products"
       );
       const data = await response.json();

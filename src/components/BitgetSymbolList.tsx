@@ -4,9 +4,7 @@ import BitgetSymbolDetails from "./BitgetSymbolDetails";
 
 const BitgetSymbolList: FC = () => {
   const [selectedSymbol, setSelectedSymbol] = useState<string | undefined>(undefined);
-
   const { data: symbols, isLoading, isError, error } = useGetBitgetSymbolList();
-console.log(symbols)
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error?.message}</div>;
 

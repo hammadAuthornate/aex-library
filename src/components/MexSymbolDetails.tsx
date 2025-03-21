@@ -1,9 +1,8 @@
-import { useGetBitgetSymbolDetails } from "../lib/bitget/api";
-import BitgetSymbolOrderBookDetails from "./BitgetSymbolOrderBookDetails";
+import { useGetMarketData } from "../lib/mexc/api";
 
-const BitgetSymbolDetails = ({ selectedSymbol }: { selectedSymbol?: string }) => {
-  const { data: symbolDetails, isLoading, isError, error } = useGetBitgetSymbolDetails(selectedSymbol);
-  console.log(symbolDetails)
+const MexSymbolDetails = ({ selectedSymbol }: { selectedSymbol?: string }) => {
+  const { data: symbolDetails, isLoading, isError, error } = useGetMarketData(selectedSymbol);
+
   if (!selectedSymbol) return <div>Select a symbol to view details.</div>;
   if (isLoading) return <div>Loading details...</div>;
   if (isError) return <div>Error: {error?.message}</div>;
@@ -17,9 +16,8 @@ const BitgetSymbolDetails = ({ selectedSymbol }: { selectedSymbol?: string }) =>
       <p>Low Price 24h: {symbolDetails.low24h}</p>
       <p>Volume 24h: {symbolDetails.baseVol}</p>
       <p>Turnover 24h: {symbolDetails.quoteVol}</p>
-      <BitgetSymbolOrderBookDetails selectedSymbol={selectedSymbol} />
     </div>
   );
 };
 
-export default BitgetSymbolDetails;
+export default MexSymbolDetails;
