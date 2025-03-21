@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { useGetMarketDefaultSymbols } from "../lib/mexc/api";
+import { useGetMarketDefaultSymbols } from "../../lib/mexc/api";
 
 const MexSymbolList: FC = () => {
   const [selectedSymbol, setSelectedSymbol] = useState<string | undefined>();
