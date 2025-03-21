@@ -1,4 +1,4 @@
-import { useGetBitgetSymbolDetails } from "../lib/bitget/api";
+import { useGetBitgetSymbolDetails } from "../../lib/bitget/api";
 import BitgetSymbolOrderBookDetails from "./BitgetSymbolOrderBookDetails";
 
 const BitgetSymbolDetails = ({ selectedSymbol }: { selectedSymbol?: string }) => {
