@@ -2,11 +2,19 @@ import {
   AccountOrderV5,
   OrderbookResponseV5,
   OrderResultV5,
+  OrderSideV5,
   RestClientV5,
   TickerSpotV5,
 } from "bybit-api";
 
-const client = new RestClientV5({ testnet: true });
+const API_KEY = process.env.BYBIT_API_KEY;
+const API_SECRET = process.env.BYBIT_API_SECRET;
+
+const client = new RestClientV5({
+  testnet: true,
+  key: API_KEY,
+  secret: API_SECRET,
+});
 
 export class ByBitService {
   static async fetchSymbolList(): Promise<TickerSpotV5[]> {
@@ -34,13 +42,17 @@ export class ByBitService {
     return response.result;
   }
 
-  static async placeOrder(symbol: string): Promise<OrderResultV5> {
+  static async placeOrder(
+    symbol: string,
+    qty: string,
+    side: OrderSideV5
+  ): Promise<OrderResultV5> {
     const response = await client.submitOrder({
       category: "spot",
       symbol: symbol,
-      side: "Buy",
+      side: side,
       orderType: "Market",
-      qty: "1",
+      qty: qty,
     });
     return response.result;
   }

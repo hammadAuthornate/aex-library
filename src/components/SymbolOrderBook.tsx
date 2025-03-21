@@ -1,4 +1,7 @@
-import { useGetBybitSymbolOrderBook } from "../lib/bybit/api";
+import {
+  useGetBybitSymbolOrderBook,
+  useSubmitBybitOrder,
+} from "../lib/bybit/api";
 
 export default function SymbolOrderBookDetails({
   selectedSymbol,
@@ -10,7 +13,10 @@ export default function SymbolOrderBookDetails({
     isLoading,
     isError,
     error,
+    refetch,
   } = useGetBybitSymbolOrderBook(selectedSymbol);
+
+  const { mutate } = useSubmitBybitOrder();
   if (!selectedSymbol) {
     return <div>Select a symbol to view details.</div>;
   }
@@ -31,6 +37,16 @@ export default function SymbolOrderBookDetails({
     <div>
       <h2>OrderBook for {selectedSymbol}</h2>
       <div>Bids:</div>
+      <button
+        onClick={() =>
+          mutate(
+            { qty: "1", side: "Buy", symbol: selectedSymbol },
+            { onSuccess: () => refetch() }
+          )
+        }
+      >
+        Place test bid
+      </button>
       <div>
         {orderBookDetails?.b?.length === 0 && <div>No Bids available</div>}
         {orderBookDetails?.b?.map((bids, index) => (
