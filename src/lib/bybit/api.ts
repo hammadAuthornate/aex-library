@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ByBitService } from "./service";
+import { OrderSideV5 } from "bybit-api";
 
 export function useGetBybitSymbolList() {
   return useQuery({
@@ -31,5 +32,25 @@ export function useGetBybitSymbolOrderBook(symbol?: string) {
       return ByBitService.fetchSymbolOrderBook(symbol);
     },
     enabled: !!symbol,
+  });
+}
+
+export function useSubmitBybitOrder() {
+  return useMutation({
+    mutationKey: ["bybit-symbol-place-order"],
+    mutationFn: ({
+      symbol,
+      qty,
+      side,
+    }: {
+      symbol: string;
+      qty: string;
+      side: OrderSideV5;
+    }) => {
+      if (!symbol || !qty) {
+        throw new Error("No Symbol or quantity provided");
+      }
+      return ByBitService.placeOrder(symbol, qty, side);
+    },
   });
 }
