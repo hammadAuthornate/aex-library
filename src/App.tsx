@@ -1,14 +1,14 @@
 import BitgetSymbolList from "./components/BitgetSymbolList";
+import ByBitSymbolList from "./components/ByBit/ByBitSymbolList";
 import MexSymbolList from "./components/MexSymbolList";
-import SymbolList from "./components/SymbolList";
 import QueryProvider from "./provider/QueryProvider";
 
 function App() {
   return (
     <div className="App">
       <QueryProvider>
-        {/* <SymbolList/> */}
-        {/* <BitgetSymbolList/> */}
+        <ByBitSymbolList/>
+        <BitgetSymbolList/>
         <MexSymbolList/>
       </QueryProvider>
     </div>

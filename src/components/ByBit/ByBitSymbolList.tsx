@@ -1,8 +1,8 @@
-import { FC, useState } from "react";
-import { useGetBybitSymbolList } from "../lib/bybit/api";
-import SymbolDetails from "./SymbolDetails";
+import { useState } from "react";
+import { useGetBybitSymbolList } from "../../lib/bybit/api";
+import ByBitSymbolDetails from "./ByBitSymbolDetails";
 
-const SymbolList: FC = () => {
+export default function ByBitSymbolList() {
   const [selectedSymbol, setSelectedSymbol] = useState<string | undefined>(
     undefined
   );
@@ -34,9 +34,7 @@ const SymbolList: FC = () => {
           </li>
         ))}
       </ul>
-      <SymbolDetails selectedSymbol={selectedSymbol} />
+      <ByBitSymbolDetails selectedSymbol={selectedSymbol} />
     </div>
   );
-};
-
-export default SymbolList;
+}
