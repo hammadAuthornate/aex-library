@@ -17,6 +17,19 @@ export function useGetBybitSymbolDetails(symbol?: string) {
       }
       return ByBitService.fetchSymbolDetails(symbol);
     },
-    enabled: !!symbol, // Ensure the query only runs when a symbol is provided
+    enabled: !!symbol,
+  });
+}
+
+export function useGetBybitSymbolOrderBook(symbol?: string) {
+  return useQuery({
+    queryKey: ["bybit-symbol-orderbook", symbol],
+    queryFn: () => {
+      if (!symbol) {
+        throw new Error("No Symbol provided");
+      }
+      return ByBitService.fetchSymbolOrderBook(symbol);
+    },
+    enabled: !!symbol,
   });
 }

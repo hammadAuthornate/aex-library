@@ -17,4 +17,12 @@ export class ByBitService {
     });
     return response.result.list?.at(0);
   }
+
+  static async fetchSymbolOrderBook(symbol: string): Promise<any> {
+    const response = await client.getOrderbook({
+      category: "spot",
+      symbol: symbol,
+    });
+    return response.result;
+  }
 }
