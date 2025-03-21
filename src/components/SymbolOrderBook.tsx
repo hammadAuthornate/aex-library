@@ -6,7 +6,7 @@ export default function SymbolOrderBookDetails({
   selectedSymbol?: string;
 }) {
   const {
-    data: symbolDetails,
+    data: orderBookDetails,
     isLoading,
     isError,
     error,
@@ -23,19 +23,31 @@ export default function SymbolOrderBookDetails({
     return <div>Error: {error?.message?.toString()}</div>;
   }
 
-  if (!symbolDetails) {
+  if (!orderBookDetails) {
     return <div>No details available for {selectedSymbol}.</div>;
   }
 
   return (
     <div>
-      <h2>{selectedSymbol} Details</h2>
-      <p>Last Price: {symbolDetails.lastPrice}</p>
-      <p>High Price 24h: {symbolDetails.highPrice24h}</p>
-      <p>Low Price 24h: {symbolDetails.lowPrice24h}</p>
-      <p>Volume 24h: {symbolDetails.volume24h}</p>
-      <p>Turnover 24h: {symbolDetails.turnover24h}</p>
-      {/* Add more details as needed */}
+      <h2>OrderBook for {selectedSymbol}</h2>
+      <div>Bids:</div>
+      <div>
+        {orderBookDetails?.b?.length === 0 && <div>No Bids available</div>}
+        {orderBookDetails?.b?.map((bids, index) => (
+          <div key={index}>
+            Bid {index + 1}: price {bids?.at(0)} size {bids?.at(1)}
+          </div>
+        ))}
+      </div>
+      <div>Asking:</div>
+      <div>
+        {orderBookDetails?.a?.length === 0 && <div>No Asking available</div>}
+        {orderBookDetails?.a?.map((asks, index) => (
+          <div key={index}>
+            Ask {index + 1}: price {asks?.at(0)} size {asks?.at(1)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { RestClientV5, TickerSpotV5 } from "bybit-api";
+import { OrderbookResponseV5, RestClientV5, TickerSpotV5 } from "bybit-api";
 
 const client = new RestClientV5({ testnet: true });
 
@@ -18,7 +18,7 @@ export class ByBitService {
     return response.result.list?.at(0);
   }
 
-  static async fetchSymbolOrderBook(symbol: string): Promise<any> {
+  static async fetchSymbolOrderBook(symbol: string): Promise<OrderbookResponseV5> {
     const response = await client.getOrderbook({
       category: "spot",
       symbol: symbol,
