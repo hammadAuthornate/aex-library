@@ -1,9 +1,9 @@
 import {
   useGetBybitSymbolOrderBook,
   useSubmitBybitOrder,
-} from "../lib/bybit/api";
+} from "../../lib/bybit/api";
 
-export default function SymbolOrderBookDetails({
+export default function ByBitSymbolOrderBookDetails({
   selectedSymbol,
 }: {
   selectedSymbol?: string;

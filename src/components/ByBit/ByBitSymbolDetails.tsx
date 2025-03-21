@@ -1,7 +1,7 @@
-import { useGetBybitSymbolDetails } from "../lib/bybit/api";
-import SymbolOrderBookDetails from "./SymbolOrderBook";
+import { useGetBybitSymbolDetails } from "../../lib/bybit/api";
+import ByBitSymbolOrderBookDetails from "./ByBitSymbolOrderBook";
 
-export default function SymbolDetails({
+export default function ByBitSymbolDetails({
   selectedSymbol,
 }: {
   selectedSymbol?: string;
@@ -37,7 +37,7 @@ export default function SymbolDetails({
       <p>Volume 24h: {symbolDetails.volume24h}</p>
       <p>Turnover 24h: {symbolDetails.turnover24h}</p>
       {/* Add more details as needed */}
-      <SymbolOrderBookDetails selectedSymbol={selectedSymbol} />
+      <ByBitSymbolOrderBookDetails selectedSymbol={selectedSymbol} />
     </div>
   );
 }
