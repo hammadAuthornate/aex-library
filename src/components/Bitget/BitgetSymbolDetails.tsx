@@ -1,4 +1,4 @@
-import { useGetBitgetSymbolDetails } from "../lib/bitget/api";
+import { useGetBitgetSymbolDetails } from "../../lib/bitget/api";
 import BitgetSymbolOrderBookDetails from "./BitgetSymbolOrderBookDetails";
 
 const BitgetSymbolDetails = ({ selectedSymbol }: { selectedSymbol?: string }) => {
@@ -6,7 +6,7 @@ const BitgetSymbolDetails = ({ selectedSymbol }: { selectedSymbol?: string }) =>
   console.log(symbolDetails)
   if (!selectedSymbol) return <div>Select a symbol to view details.</div>;
   if (isLoading) return <div>Loading details...</div>;
-  if (isError) return <div>Error: {error?.message}</div>;
+  if (isError) return <div>Error fetching details for {selectedSymbol}.</div>;
   if (!symbolDetails) return <div>No details available for {selectedSymbol}.</div>;
 
   return (

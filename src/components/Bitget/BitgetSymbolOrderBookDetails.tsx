@@ -1,4 +1,4 @@
-import { useGetBitgetOrderBook } from "../lib/bitget/api";
+import { useGetBitgetOrderBook } from "../../lib/bitget/api";
 
 const BitgetSymbolOrderBookDetails = ({ selectedSymbol }: { selectedSymbol?: string }) => {
   const { data: orderBook, isLoading, isError, error } = useGetBitgetOrderBook(selectedSymbol);

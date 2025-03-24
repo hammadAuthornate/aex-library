@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useGetBitgetSymbolList } from "../lib/bitget/api";
+import { useGetBitgetSymbolList } from "../../lib/bitget/api";
 import BitgetSymbolDetails from "./BitgetSymbolDetails";
 
 const BitgetSymbolList: FC = () => {

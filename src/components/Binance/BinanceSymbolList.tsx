@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { useGetBinanceSymbolList } from "../lib/binance/api";
+import { useGetBinanceSymbolList } from "../../lib/binance/api";
 
 const BinanceSymbolList: FC = () => {
   const [selectedSymbol, setSelectedSymbol] = useState<string | undefined>(undefined);
