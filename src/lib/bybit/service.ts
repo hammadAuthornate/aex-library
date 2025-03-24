@@ -14,6 +14,8 @@ const client = new RestClientV5({
   testnet: true,
   key: API_KEY,
   secret: API_SECRET,
+  recv_window: 5000,
+  enable_time_sync: true,
 });
 
 export class ByBitService {
@@ -53,6 +55,8 @@ export class ByBitService {
       side: side,
       orderType: "Market",
       qty: qty,
+      // timeInForce: "GTC",
+      price: "1",
     });
     return response.result;
   }
