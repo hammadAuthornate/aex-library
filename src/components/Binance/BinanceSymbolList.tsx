@@ -5,11 +5,11 @@ import BinanceSymbolDetails from "./BinanceSymbolDetails";
 const BinanceSymbolList: FC = () => {
   const [symbols, setSymbols] = useState<{ symbol: string }[]>([]);
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
-
+  const baseUrl = "http://localhost:5000";
   useEffect(() => {
     const fetchSymbols = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/binance/api/exchangeInfo");
+        const response = await axios.get(`${baseUrl}/binance/api/exchangeInfo`);
         setSymbols(response.data);
       } catch (error) {
         console.error("Error fetching symbols:", error);

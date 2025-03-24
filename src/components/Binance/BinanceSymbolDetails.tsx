@@ -9,12 +9,12 @@ const BinanceSymbolDetails: FC<SymbolDetailsProps> = ({ symbol }) => {
   const [details, setDetails] = useState<any>(null);
   const [orderBook, setOrderBook] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
+  const baseUrl = "http://localhost:5000";
   useEffect(() => {
     const fetchSymbolDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/binance/api/symbol/${symbol}`
+          `${baseUrl}/binance/api/symbol/${symbol}`
         );
         setDetails(response.data);
       } catch (error) {
@@ -25,7 +25,7 @@ const BinanceSymbolDetails: FC<SymbolDetailsProps> = ({ symbol }) => {
     const fetchOrderBook = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/binance/api/orderbook/${symbol}`
+          `${baseUrl}/binance/api/orderbook/${symbol}`
         );
         setOrderBook(response.data);
       } catch (error) {
