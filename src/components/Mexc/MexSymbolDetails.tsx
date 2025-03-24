@@ -2,18 +2,7 @@ import { FC, useEffect, useState } from "react";
 import axios from "axios";
 
 interface SymbolDetails {
-  symbol: string;
-  status: string;
-  baseAsset: string;
-  baseAssetPrecision: number;
-  quoteAsset: string;
-  quotePrecision: number;
-  orderTypes?: string[];
-  isSpotTradingAllowed: boolean;
-  isMarginTradingAllowed: boolean;
-  maxQuoteAmount: string;
-  makerCommission: string;
-  takerCommission: string;
+  [key: string]: any; // Make it dynamic to handle all fields
 }
 
 const MexSymbolDetails: FC<{ selectedSymbol: string }> = ({
@@ -25,6 +14,7 @@ const MexSymbolDetails: FC<{ selectedSymbol: string }> = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const baseUrl = "http://localhost:5000";
+
   useEffect(() => {
     const fetchSymbolDetails = async () => {
       setIsLoading(true);
@@ -35,7 +25,6 @@ const MexSymbolDetails: FC<{ selectedSymbol: string }> = ({
           `${baseUrl}/api/exchangeInfo?symbol=${selectedSymbol}`
         );
         setSymbolDetails(response.data);
-        console.log(response);
       } catch (error) {
         console.error("Error fetching symbol details:", error);
         setIsError(true);
@@ -55,40 +44,24 @@ const MexSymbolDetails: FC<{ selectedSymbol: string }> = ({
   return (
     <div>
       <h2>{symbolDetails.symbol} Details</h2>
-      <p>
-        <strong>Status:</strong> {symbolDetails.status}
-      </p>
-      <p>
-        <strong>Base Asset:</strong> {symbolDetails.baseAsset} (Precision:{" "}
-        {symbolDetails.baseAssetPrecision})
-      </p>
-      <p>
-        <strong>Quote Asset:</strong> {symbolDetails.quoteAsset} (Precision:{" "}
-        {symbolDetails.quotePrecision})
-      </p>
-      <p>
-        <strong>Order Types:</strong>{" "}
-        {symbolDetails.orderTypes && symbolDetails.orderTypes.length > 0
-          ? symbolDetails.orderTypes.join(", ")
-          : "N/A"}
-      </p>
-      <p>
-        <strong>Spot Trading Allowed:</strong>{" "}
-        {symbolDetails.isSpotTradingAllowed ? "Yes" : "No"}
-      </p>
-      <p>
-        <strong>Margin Trading Allowed:</strong>{" "}
-        {symbolDetails.isMarginTradingAllowed ? "Yes" : "No"}
-      </p>
-      <p>
-        <strong>Max Quote Amount:</strong> {symbolDetails.maxQuoteAmount}
-      </p>
-      <p>
-        <strong>Maker Commission:</strong> {symbolDetails.makerCommission}
-      </p>
-      <p>
-        <strong>Taker Commission:</strong> {symbolDetails.takerCommission}
-      </p>
+      <table
+        border={1}
+        cellPadding="5"
+        style={{ borderCollapse: "collapse", width: "100%" }}
+      >
+        <tbody>
+          {Object.entries(symbolDetails).map(([key, value]) => (
+            <tr key={key}>
+              <td>
+                <strong>{key}</strong>
+              </td>
+              <td>
+                {Array.isArray(value) ? value.join(", ") : value?.toString()}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
