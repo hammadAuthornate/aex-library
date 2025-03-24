@@ -45,6 +45,7 @@
     "binance": "^2.15.14",
     "bitget-api": "^2.3.5",
     "bybit-api": "^4.0.1",
-    "mexc-api-sdk": "^1.0.3"
+    "mexc-api-sdk": "^1.0.3",
+    "stream-browserify": "^3.0.0"
   }
 }

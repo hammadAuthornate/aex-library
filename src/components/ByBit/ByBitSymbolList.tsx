@@ -19,7 +19,7 @@ export default function ByBitSymbolList() {
 
   return (
     <div>
-      <h2>Spot Trading Symbols</h2>
+      <h2>ByBit Spot Trading Symbols</h2>
       <ul style={{ maxHeight: "450px", overflowY: "scroll" }}>
         {symbols?.map(({ symbol }) => (
           <li
