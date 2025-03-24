@@ -18,12 +18,16 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "zustand"], // Prevent bundling React and ReactDOM
+      external: [
+        "react",
+        "react-dom",
+        "axios",
+      ], // Prevent bundling React and ReactDOM
       output: {
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          zustand: "zustand",
+          axios: "axios",
         },
       },
     },
