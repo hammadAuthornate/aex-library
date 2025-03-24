@@ -1,3 +1,4 @@
+import BinanceSymbolList from "./components/Binance/BinanceSymbolList";
 import BitgetSymbolList from "./components/Bitget/BitgetSymbolList";
 import ByBitSymbolList from "./components/ByBit/ByBitSymbolList";
 import MexSymbolList from "./components/Mexc/MexSymbolList";
@@ -10,6 +11,7 @@ function App() {
         <ByBitSymbolList />
         <BitgetSymbolList />
         <MexSymbolList />
+        <BinanceSymbolList/>
       </QueryProvider>
     </div>
   );

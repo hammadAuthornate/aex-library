@@ -1,37 +1,43 @@
-import { FC, useState } from "react";
-import { useGetBinanceSymbolList } from "../../lib/binance/api";
+import { FC, useState, useEffect } from "react";
+import axios from "axios";
+import BinanceSymbolDetails from "./BinanceSymbolDetails";
 
 const BinanceSymbolList: FC = () => {
-  const [selectedSymbol, setSelectedSymbol] = useState<string | undefined>(undefined);
+  const [symbols, setSymbols] = useState<{ symbol: string }[]>([]);
+  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
 
-  const { data: symbols, isLoading, isError, error } = useGetBinanceSymbolList();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error: {error?.message}</div>;
-  }
+  useEffect(() => {
+    const fetchSymbols = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/binance/api/exchangeInfo");
+        setSymbols(response.data);
+      } catch (error) {
+        console.error("Error fetching symbols:", error);
+      }
+    };
+    fetchSymbols();
+  }, []);
 
   return (
     <div>
-      <h2>Spot Trading Symbols</h2>
-      <ul style={{ maxHeight: "450px", overflowY: "scroll", listStyle: "none", padding: 0 }}>
-        {symbols?.map(({ symbol }: { symbol: string }) => (
+      <h2>Binance Spot Trading Symbols</h2>
+      <ul style={{ maxHeight: "450px", overflowY: "scroll", padding: 0 }}>
+        {symbols.map(({ symbol }) => (
           <li
             key={symbol}
             onClick={() => setSelectedSymbol(symbol)}
             style={{
               cursor: "pointer",
-              fontWeight: selectedSymbol === symbol ? "bold" : "normal",
               padding: "5px",
+              fontWeight: selectedSymbol === symbol ? "bold" : "normal",
             }}
           >
             {symbol}
           </li>
         ))}
       </ul>
+
+      {selectedSymbol && <BinanceSymbolDetails symbol={selectedSymbol} />}
     </div>
   );
 };
