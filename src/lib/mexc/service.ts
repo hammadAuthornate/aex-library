@@ -33,8 +33,6 @@ export class MEXCService {
   /**
    * Get Market Data (Ticker Price)
    */
-  static async getMarketData() {
-    return client.bookTicker();
-  }
+  // 
 
 }

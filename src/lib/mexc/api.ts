@@ -26,12 +26,4 @@ export function useCancelOrder() {
   });
 }
 
-/**
- * Hook to get market data
- */
-export function useGetMarketDefaultSymbols() {
-  return useQuery({
-    queryKey: ["marketData"],
-    queryFn: () => MEXCService.getMarketData(), // Ensure the function is called properly
-  });
-}
+

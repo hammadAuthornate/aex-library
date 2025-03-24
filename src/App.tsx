@@ -7,9 +7,9 @@ function App() {
   return (
     <div className="App">
       <QueryProvider>
-        <ByBitSymbolList/>
-        <BitgetSymbolList/>
-        <MexSymbolList/>
+        {/* <ByBitSymbolList /> */}
+        {/* <BitgetSymbolList /> */}
+        <MexSymbolList />
       </QueryProvider>
     </div>
   );

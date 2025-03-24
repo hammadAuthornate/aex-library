@@ -1,44 +1,39 @@
 import { FC, useEffect, useState } from "react";
-import { useGetMarketDefaultSymbols } from "../lib/mexc/api";
+import axios from "axios";
+import MexSymbolDetails from "./MexSymbolDetails";
 
 const MexSymbolList: FC = () => {
-  const [selectedSymbol, setSelectedSymbol] = useState<string | undefined>();
-  const {
-    data: symbols,
-    isLoading,
-    isError,
-    error,
-  } = useGetMarketDefaultSymbols(); // Fetch all symbols
-  const BASE_URL = "https://api.mexc.com";
-  const endpoint = "/api/v3/defaultSymbols";
-  useEffect(() => {
-    const marketTokens = async () => {
-      const response = await fetch(`${BASE_URL}${endpoint}`);
-      console.log(response)
-    };
-    marketTokens()
-  }, []);
+  const [allSymbols, setAllSymbols] = useState<any>([]);
+  const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error?.message}</div>;
+  useEffect(() => {
+    const fetchSymbols = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/symbols");
+        setAllSymbols(response.data); 
+      } catch (error) {
+        console.error("Error fetching symbols:", error);
+      }
+    };
+    fetchSymbols();
+  }, []);
 
   return (
     <div>
       <h2>MEXC Spot Trading Symbols</h2>
       <ul style={{ maxHeight: "450px", overflowY: "scroll" }}>
-        {symbols?.map(({ symbol }: { symbol: string }) => (
+        {allSymbols?.data?.map((symbol:string) => (
           <li
             key={symbol}
-            onClick={() => setSelectedSymbol(symbol)}
-            style={{
-              cursor: "pointer",
-              fontWeight: selectedSymbol === symbol ? "bold" : "normal",
-            }}
+            onClick={() => setSelectedSymbol(symbol)} 
+            style={{ cursor: "pointer", fontWeight: selectedSymbol === symbol ? "bold" : "normal" }}
           >
             {symbol}
           </li>
         ))}
       </ul>
+
+      {selectedSymbol && <MexSymbolDetails selectedSymbol={selectedSymbol} />}
     </div>
   );
 };
