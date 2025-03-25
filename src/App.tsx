@@ -8,10 +8,10 @@ function App() {
   return (
     <div className="App">
       <QueryProvider>
-        {/* /<ByBitSymbolList />
-        <BitgetSymbolList /> */}
+        <ByBitSymbolList />
+        <BitgetSymbolList /> 
         <MexSymbolList />
-        {/* <BinanceSymbolList />/ */}
+        <BinanceSymbolList />
       </QueryProvider>
     </div>
   );
