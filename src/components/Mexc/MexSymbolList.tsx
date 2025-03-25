@@ -1,6 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import axios from "axios";
 import MexSymbolDetails from "./MexSymbolDetails";
+import MexcNewOrder from "./MexcNewOrder";
+import MexCancelOrder from "./MexcCancelOrder";
+import MexQueryOrder from "./OrderStatus";
 
 const MexSymbolList: FC = () => {
   const [allSymbols, setAllSymbols] = useState<any>([]);
@@ -17,7 +20,6 @@ const MexSymbolList: FC = () => {
     };
     fetchSymbols();
   }, []);
-
   return (
     <div>
       <h2>MEXC Spot Trading Symbols</h2>
@@ -35,8 +37,10 @@ const MexSymbolList: FC = () => {
           </li>
         ))}
       </ul>
-
       {selectedSymbol && <MexSymbolDetails selectedSymbol={selectedSymbol} />}
+      <MexcNewOrder />
+      <MexCancelOrder />
+      <MexQueryOrder selectedSymbol={selectedSymbol as string} />
     </div>
   );
 };
