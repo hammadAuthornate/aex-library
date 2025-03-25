@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import axios from "axios";
 
 interface SymbolDetails {
-  [key: string]: any; // Make it dynamic to handle all fields
+  [key: string]: any; 
 }
 
 const MexSymbolDetails: FC<{ selectedSymbol: string }> = ({
@@ -13,7 +13,7 @@ const MexSymbolDetails: FC<{ selectedSymbol: string }> = ({
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "http://localhost:3000";
 
   useEffect(() => {
     const fetchSymbolDetails = async () => {
@@ -21,9 +21,11 @@ const MexSymbolDetails: FC<{ selectedSymbol: string }> = ({
       setIsError(false);
 
       try {
-        const response = await axios.get(
-          `${baseUrl}/api/exchangeInfo?symbol=${selectedSymbol}`
-        );
+        const response = await axios.get(`${baseUrl}/mexc/exchangeInfo`, {
+          params: {
+            symbol: selectedSymbol,
+          },
+        });
         setSymbolDetails(response.data);
       } catch (error) {
         console.error("Error fetching symbol details:", error);

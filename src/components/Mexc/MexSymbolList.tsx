@@ -5,11 +5,11 @@ import MexSymbolDetails from "./MexSymbolDetails";
 const MexSymbolList: FC = () => {
   const [allSymbols, setAllSymbols] = useState<any>([]);
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "http://localhost:3000";
   useEffect(() => {
     const fetchSymbols = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/api/symbols`);
+        const response = await axios.get(`${baseUrl}/mexc/symbols`);
         setAllSymbols(response.data);
       } catch (error) {
         console.error("Error fetching symbols:", error);

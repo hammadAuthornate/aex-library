@@ -3,13 +3,13 @@ import axios from "axios";
 import BinanceSymbolDetails from "./BinanceSymbolDetails";
 
 const BinanceSymbolList: FC = () => {
-  const [symbols, setSymbols] = useState<{ symbol: string }[]>([]);
+  const [symbols, setSymbols] = useState<any[]>([]);
   const [selectedSymbol, setSelectedSymbol] = useState<string | null>(null);
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "http://localhost:3000";
   useEffect(() => {
     const fetchSymbols = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/binance/api/exchangeInfo`);
+        const response = await axios.get(`${baseUrl}/binance/exchangeInfo`);
         setSymbols(response.data);
       } catch (error) {
         console.error("Error fetching symbols:", error);
@@ -17,12 +17,13 @@ const BinanceSymbolList: FC = () => {
     };
     fetchSymbols();
   }, []);
+  console.log('symbols',symbols  )
 
   return (
     <div>
       <h2>Binance Spot Trading Symbols</h2>
       <ul style={{ maxHeight: "450px", overflowY: "scroll", padding: 0 }}>
-        {symbols.map(({ symbol }) => (
+        {symbols?.map(({ symbol }:any) => (
           <li
             key={symbol}
             onClick={() => setSelectedSymbol(symbol)}
