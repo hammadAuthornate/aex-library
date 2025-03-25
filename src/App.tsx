@@ -9,8 +9,8 @@ function App() {
     <div className="App">
       <QueryProvider>
         <ByBitSymbolList />
-        <BitgetSymbolList />
-        <MexSymbolList />/
+        <BitgetSymbolList /> 
+        <MexSymbolList />
         <BinanceSymbolList />
       </QueryProvider>
     </div>
